@@ -2,7 +2,7 @@
 
 **Suit la manière dont les arguments d’un débat public français apparaissent dans les engagements ultérieurs du maître d’ouvrage.**
 
-[![Tests](https://github.com/gbesse/jev-debat-trace/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-debat-trace/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.1 · Documentation française
+[![Tests](https://github.com/gbesse/jev-debat-trace/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-debat-trace/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.2 · Documentation française
 
 Le dépôt compare une contribution sourcée à une décision ou un engagement plus récent du même projet et classe la relation : adoption, reprise partielle, réponse sans modification, absence de traitement ou autre sujet.
 
@@ -16,6 +16,65 @@ npm run demo
 ```
 
 La démonstration utilise uniquement des données et probabilités synthétiques. Elle n’effectue aucun appel réseau et ne constitue pas une mesure de qualité de Jev.
+
+## Exemple exécutable
+
+Cet exemple suit une proposition de desserte dans un engagement ultérieur. Il utilise un fournisseur Jev simulé : aucune clé API ni connexion réseau n’est nécessaire. L’assertion intégrée fait échouer la commande si le comportement attendu change.
+
+Le code complet de [`examples/demo.mjs`](examples/demo.mjs) est directement copiable :
+
+```js
+// Objectif : démontrer la frontière de décision sans appel réseau.
+import assert from "node:assert/strict";
+import { traceContribution } from "../src/index.mjs";
+import { createFakeProvider } from "../src/jev.mjs";
+const p = createFakeProvider(() => ({
+  model: "jev-1.13.0",
+  answers: {
+    relation: {
+      type: "choice",
+      choice: "partially_reflected",
+      probabilities: {
+        adopted: 0.12,
+        partially_reflected: 0.7,
+        answered_without_change: 0.1,
+        unaddressed: 0.05,
+        unrelated: 0.03,
+      },
+      confidence: 0.7,
+    },
+  },
+  usage: {},
+}));
+const resultat = await traceContribution(
+  {
+    id: "c1",
+    projectId: "transport-1",
+    text: "Ajouter une desserte au quartier nord.",
+    date: "2026-02-01",
+    sourceUrl: "https://debatpublic.fr",
+  },
+  {
+    id: "k1",
+    projectId: "transport-1",
+    text: "Une étude de desserte complémentaire du nord sera lancée.",
+    date: "2026-06-01",
+    sourceUrl: "https://debatpublic.fr",
+    authorType: "maitre_ouvrage",
+  },
+  p,
+);
+assert.equal(resultat.relation, "partially_reflected");
+console.log(JSON.stringify(resultat, null, 2));
+```
+
+Lancez-le avec :
+
+```sh
+npm run demo
+```
+
+Résultat à repérer : `relation: partially_reflected`.
 
 ## Utilisation de la bibliothèque
 
