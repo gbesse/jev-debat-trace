@@ -1,7 +1,7 @@
 {
   "name": "@gbesse/jev-debat-trace",
-  "version": "0.1.0",
-  "description": "Trace how arguments from French public debates appear in a project owner later commitments or decisions.",
+  "version": "0.1.1",
+  "description": "Suit la manière dont les arguments d’un débat public français apparaissent dans les engagements ultérieurs du maître d’ouvrage.",
   "type": "module",
   "license": "MIT",
   "engines": {

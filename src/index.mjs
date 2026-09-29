@@ -1,4 +1,4 @@
-// Purpose: Implement the package-specific, reviewable decision boundary.
+// Objectif : implémenter la frontière de décision métier propre au dépôt.
 export const RELATIONS=["adopted","partially_reflected","answered_without_change","unaddressed","unrelated"];
 function record(input,kind){if(!input?.id||!input?.projectId||!input?.text||!input?.date||!input?.sourceUrl)throw new TypeError(`${kind} needs id, projectId, text, date and sourceUrl`);const d=new Date(input.date);if(Number.isNaN(d.valueOf()))throw new TypeError("date must be ISO");return{id:String(input.id),projectId:String(input.projectId),text:String(input.text),date:d.toISOString(),sourceUrl:String(input.sourceUrl),authorType:String(input.authorType||"")};}
 export const contribution=input=>record(input,"Contribution");export const commitment=input=>record(input,"Commitment");

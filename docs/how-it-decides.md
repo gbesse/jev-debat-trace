@@ -1,5 +1,5 @@
-# How it decides
+# Comment la décision est prise
 
-Project identity, provenance and chronology are enforced in code. Jev compares one sourced contribution with one later commitment. It does not infer representativeness, consensus or project legitimacy.
+L’identité du projet, la provenance et la chronologie sont imposées par le code. Jev n’infère ni représentativité, ni consensus, ni légitimité du projet.
 
-The exact questions and criteria are versioned beside the call in [src/index.mjs](../src/index.mjs). Synthetic demo probabilities are illustrative. Calibrate review thresholds on representative labels before operational use.
+La question et les critères exacts sont versionnés dans [`src/index.mjs`](../src/index.mjs). Les probabilités de la démonstration sont synthétiques. Calibrez les seuils de revue sur des cas français annotés et représentatifs avant tout usage opérationnel.
