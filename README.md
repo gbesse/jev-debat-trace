@@ -2,7 +2,7 @@
 
 **Suit la manière dont les arguments d’un débat public français apparaissent dans les engagements ultérieurs du maître d’ouvrage.**
 
-[![Tests](https://github.com/gbesse/jev-debat-trace/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-debat-trace/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.2 · Documentation française
+[![Tests](https://github.com/gbesse/jev-debat-trace/actions/workflows/test.yml/badge.svg)](https://github.com/gbesse/jev-debat-trace/actions/workflows/test.yml) [MIT](LICENSE) · Node.js 22+ · v0.1.3 · Documentation française
 
 Le dépôt compare une contribution sourcée à une décision ou un engagement plus récent du même projet et classe la relation : adoption, reprise partielle, réponse sans modification, absence de traitement ou autre sujet.
 
@@ -71,10 +71,20 @@ console.log(JSON.stringify(resultat, null, 2));
 Lancez-le avec :
 
 ```sh
-npm run demo
+npm run demo:principal
 ```
 
 Résultat à repérer : `relation: partially_reflected`.
+
+### Cas limite à tester
+
+Deux identifiants de projet différents interrompent le rapprochement. Le code se trouve dans [`examples/cas-limite.mjs`](examples/cas-limite.mjs).
+
+```sh
+npm run demo:limite
+```
+
+Résultat à repérer : `relation: different_project · appels Jev: 0`. La commande `npm run demo` exécute les deux exemples.
 
 ## Utilisation de la bibliothèque
 
